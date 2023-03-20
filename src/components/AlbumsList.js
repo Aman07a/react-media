@@ -5,6 +5,11 @@ import Button from "./Button";
 
 function AlbumsList({ user }) {
   const { data, error, isLoading } = useFetchAlbumsQuery(user);
+  const [addAlbum, results] = useAddAlbumMutation();
+
+  const handleAddAlbum = () => {
+    addAlbum(user);
+  };
 
   let content;
   if (isLoading) {
@@ -25,7 +30,10 @@ function AlbumsList({ user }) {
 
   return (
     <div>
-      <div>Albums for {user.name}</div>
+      <div>
+        Albums for {user.name}
+        <Button onClick={handleAddAlbum}>+ Add Album</Button>
+      </div>
       <div>{content}</div>
     </div>
   );
